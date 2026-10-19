@@ -1,0 +1,80 @@
+comments:
+  # Message to be shown when two consecutive moves are played. {author} is the author of the issue
+  consecutive_moves: "{author} 不能连走两步哦！喊个朋友来走下一步吧 :D"
+
+  # Message to be shown on game over. {outcome} is a message that specifies wether white wins, black wins or
+  # both players draw, {num_moves} corresponds with the number of moves, {num_players} is the number of players
+  # in this game and finally {players} is a comma-separated list of all players in this game (in no particular
+  # order)
+  game_over: |-
+      终局！{outcome}！这一局一共走了 {num_moves} 步，由 {num_players} 位玩家一起完成。
+
+      感谢 {players} 来下棋！
+
+  # This message is displayed if the board is in an invalid state. This shouldn't be shown unless something
+  # has gone terribly wrong
+  invalid_board: "{author} 抱歉，棋盘状态异常，这一步没法执行。"
+
+  # Message to be displayed when a player plays an invalid move
+  invalid_move: |-
+      {author} 诶？`{move}` 不是一步合法的棋。
+      可能有人刚好抢先走了一步，刷新主页再试一次吧。
+
+  # Message displayed if a player tries to start a new game mid-game and the author of the issue is not the
+  # owner of the repository (the repo owner can always restart a game at any time)
+  invalid_new_game: "{author} 抱歉，这一局还没下完，只有仓库主人可以重开。"
+
+  # Message displayed when someone moves while no game is in progress
+  no_game: "{author} 现在没有进行中的棋局，点主页上的「开新的一局」再来吧。"
+
+  # Message displayed after a successful move done by a player. {move} is the move in UCI coordinates (e2e4 for example)
+  successful_move: |-
+      {author} 搞定！已经替你走了 `{move}`，棋盘一分钟左右会更新。
+      谢谢你来下棋！
+
+  # Message displayed when either a player or the repository owner start a new game
+  successful_new_game: "{author} 搞定！新的一局开始了！"
+
+  # Error message shown after an invalid command to the chess bot
+  unknown_command: "{author} 抱歉，我没看懂这个指令。请不要修改 issue 标题，再试一次吧！"
+
+issues:
+  link: "https://github.com/{repo}/issues/new?{params}"
+  move:
+    body: "请不要修改标题，直接点绿色的 Create 按钮提交就行，别的什么都不用做 :D"
+    title: "Chess: Move {source} to {dest}"
+  new_game:
+    body: "请不要修改标题，直接点绿色的 Create 按钮提交就行，别的什么都不用做 :D"
+    title: "Chess: Start new game"
+
+# Labels put on the move issues
+labels:
+  capture: "⚔️ 吃子"
+  white: "白方"
+  black: "黑方"
+  invalid: "无效"
+  winner: "👑 分出胜负"
+  draw: "👑 和棋"
+
+markers:
+  board:
+    begin: "<!-- BEGIN CHESS BOARD -->\n"
+    end: "<!-- END CHESS BOARD -->\n"
+  last_moves:
+    begin: "<!-- BEGIN LAST MOVES -->\n"
+    end: "<!-- END LAST MOVES -->\n"
+  moves:
+    begin: "<!-- BEGIN MOVES LIST -->\n"
+    end: "<!-- END MOVES LIST -->\n"
+  top_moves:
+    begin: "<!-- BEGIN TOP MOVES -->\n"
+    end: "<!-- END TOP MOVES -->\n"
+  turn:
+    begin: "<!-- BEGIN TURN -->"
+    end: "<!-- END TURN -->"
+
+misc:
+  # Maximum number of last moves displayed
+  max_last_moves: 5
+  # Maximum number of top players displayed
+  max_top_moves: 10

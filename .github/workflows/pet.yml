@@ -1,0 +1,22 @@
+# 像素猫：每 6 小时根据提交记录更新 dist/pet.svg
+name: Pet
+
+on:
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - uses: prsdx/github-pet@988c75ee4f1ad5374d3ca692db4b307761776067 # v1.3.0
+        with:
+          username: ${{ github.repository_owner }}
+          timezone-offset-minutes: "480"
+          accent-color: "#4af626"

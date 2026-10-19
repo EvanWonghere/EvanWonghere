@@ -1,0 +1,49 @@
+# 全民下棋：标题以 "Chess:" 开头的 issue 会触发一次运行，按时间顺序处理所有还开着的棋步 issue
+name: Chess
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  move:
+    name: Play chess
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: startsWith(github.event.issue.title, 'Chess:')
+    # 一次只跑一个；排队中被取消的那次，它的 issue 会由下一次运行接着处理
+    concurrency:
+      group: chess
+
+    steps:
+      # 取默认分支的最新状态，而不是 issue 创建那一刻的旧提交
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+
+      - name: Play the moves
+        working-directory: chess
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
+        run: |
+          pip install -r requirements.txt
+          python main.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md chess
+          git diff --cached --quiet && exit 0
+          git commit -m "Chess: update the board"
+          git pull --rebase
+          git push
