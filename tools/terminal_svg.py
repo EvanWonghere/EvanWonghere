@@ -219,7 +219,7 @@ def boot():
 
 # -------------------------------------------------------------- beesay.svg
 
-BEE_UP = r"""
+BEE = r"""
         __     __
        /  \   /  \
        \   \ /   /
@@ -227,15 +227,7 @@ BEE_UP = r"""
     >=[|||||](o.o)
         " "
 """.strip("\n").split("\n")
-
-BEE_DOWN = r"""
-
-
-      .--.__Y__.--.
-      '--'     '--'
-    >=[|||||](o.o)
-        " "
-""".strip("\n").split("\n")
+BEE_WINGS = 4  # the first rows are the wings
 
 # Lines I like; the last one is my GitHub bio
 QUOTES = [
@@ -288,18 +280,28 @@ def beesay():
     tail = text(PAD + 16 * CW, tail_y, "\\", GREEN) + text(PAD + 17 * CW, tail_y + LH - 4, "\\", GREEN)
     out.append(appear(show_at, bubble + tail))
 
-    bee_y = tail_y + 2 * LH
-    def frame(lines):
-        return "".join(text(PAD + 8 * CW, bee_y + k * (LH - 4), line, GREEN) for k, line in enumerate(lines))
+    bee_x, bee_y = PAD + 8 * CW, tail_y + 2 * LH
+    def rows(lines, first=0):
+        return "".join(text(bee_x, bee_y + (first + k) * (LH - 4), line, GREEN) for k, line in enumerate(lines))
+    wings, body = rows(BEE[:BEE_WINGS]), rows(BEE[BEE_WINGS:], BEE_WINGS)
     if STATIC:
-        bee = frame(BEE_UP)
+        bee = wings + body
     else:
-        flap = 'dur=".36s" repeatCount="indefinite" calcMode="discrete"'
-        bee = (f'<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.4s" repeatCount="indefinite"/>'
-               f'<g><animate attributeName="opacity" values="1;0" {flap}/>{frame(BEE_UP)}</g>'
-               f'<g opacity="0"><animate attributeName="opacity" values="0;1" {flap}/>{frame(BEE_DOWN)}</g></g>')
+        # Hover instead of hopping: sway sideways and bob on different periods so the path keeps
+        # changing, lean into the sway, and let the wings shimmer rather than swap shape
+        ease = lambda n: 'calcMode="spline" keySplines="' + ";".join([".45 0 .55 1"] * n) + '"'
+        cx, cy = bee_x + 11 * CW, bee_y + 3 * (LH - 4)
+        trail_y = bee_y + BEE_WINGS * (LH - 4)
+        trail = "".join(
+            f'<g opacity="0"><animate attributeName="opacity" values="0;.7;0" dur=".9s" begin="{i * 0.3:.1f}s" repeatCount="indefinite"/>'
+            f'{text(bee_x + (2 - 2 * i) * CW, trail_y, "-", DIM)}</g>' for i in range(3))
+        bee = (f'<g><animateTransform attributeName="transform" type="translate" values="-16 0;16 0;-16 0" keyTimes="0;.5;1" dur="7s" repeatCount="indefinite" {ease(2)}/>'
+               f'<g><animateTransform attributeName="transform" type="translate" values="0 -4;0 4;0 -4" keyTimes="0;.5;1" dur="2.4s" repeatCount="indefinite" {ease(2)}/>'
+               f'<g><animateTransform attributeName="transform" type="rotate" values="0 {cx:.1f} {cy:.1f};3 {cx:.1f} {cy:.1f};0 {cx:.1f} {cy:.1f};-3 {cx:.1f} {cy:.1f};0 {cx:.1f} {cy:.1f}" '
+               f'keyTimes="0;.25;.5;.75;1" dur="7s" repeatCount="indefinite" {ease(4)}/>'
+               f'{trail}<g><animate attributeName="opacity" values="1;.55;1" dur=".2s" repeatCount="indefinite"/>{wings}</g>{body}</g></g></g>')
     out.append(appear(show_at, bee))
-    h = bee_y + len(BEE_UP) * (LH - 4) + 6
+    h = bee_y + len(BEE) * (LH - 4) + 10
     return window(w, h, "fortune | beesay", "".join(out))
 
 
