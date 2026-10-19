@@ -104,9 +104,9 @@ def generate_moves_list(board):
 
     return markdown + "\n"
 
-# Board images are written next to the bot and referenced from the README in the repo root
+# Board images are written next to the bot; the README loads them from the raw file host
 BOARD_DIR = 'img'
-BOARD_URL = 'chess/img'
+BOARD_URL = 'https://raw.githubusercontent.com/{repo}/main/chess/img'
 
 BOARD_COLORS = {
     'square light': '#a9c7a0',
@@ -135,4 +135,6 @@ def board_to_markdown(board):
         alt = '终局棋盘'
     else:
         alt = '当前棋盘，轮到{}走'.format('白方' if board.turn == chess.WHITE else '黑方')
-    return '<img src="{}/{}" width="400" alt="{}">\n'.format(BOARD_URL, name, alt)
+    # Inside <picture> GitHub does not wrap the image in a link to the raw file
+    url = BOARD_URL.format(repo=os.environ['GITHUB_REPOSITORY'])
+    return '<picture><img src="{}/{}" width="400" alt="{}"></picture>\n'.format(url, name, alt)

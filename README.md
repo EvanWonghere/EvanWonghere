@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/boot.svg" width="100%" alt="终端里先敲 whoami 再敲 neofetch：左边一把 ASCII 剪刀在剪一缕头发，右边是 evan@hive 的信息">
+  <picture><img src="https://raw.githubusercontent.com/EvanWonghere/EvanWonghere/main/assets/boot.svg" width="100%" alt="终端里先敲 whoami 再敲 neofetch：左边一把 ASCII 剪刀在剪一缕头发，右边是 evan@hive 的信息"></picture>
 </div>
 
 <table>
@@ -8,7 +8,7 @@
 <a href="https://store.steampowered.com/app/4268650/"><img src="assets/heircut-cut.gif" width="100%" alt="在《宫廷理发师》里拿剪刀给客人剪头发"></a>
 </td>
 <td width="58%" valign="top">
-<img src="assets/beesay.svg" width="100%" alt="一只 ASCII 小蜜蜂轮流念几句我喜欢的话">
+<picture><img src="https://raw.githubusercontent.com/EvanWonghere/EvanWonghere/main/assets/beesay.svg" width="100%" alt="一只 ASCII 小蜜蜂轮流念几句我喜欢的话"></picture>
 </td>
 </tr>
 <tr>
@@ -35,7 +35,7 @@
 <tr>
 <td valign="top">
 <!-- BEGIN CHESS BOARD -->
-<img src="chess/img/board-200de70c3b.svg" width="400" alt="当前棋盘，轮到白方走">
+<picture><img src="https://raw.githubusercontent.com/EvanWonghere/EvanWonghere/main/chess/img/board-200de70c3b.svg" width="400" alt="当前棋盘，轮到白方走"></picture>
 <!-- END CHESS BOARD -->
 </td>
 <td valign="top">
@@ -88,7 +88,7 @@
 
 ### `$ git log --oneline`
 
-<img src="assets/gitlog.svg" width="100%" alt="我最近在公开仓库里的几次提交">
+<picture><img src="https://raw.githubusercontent.com/EvanWonghere/EvanWonghere/main/assets/gitlog.svg" width="100%" alt="我最近在公开仓库里的几次提交"></picture>
 
 <pre>
 <b>evan@hive</b>:~$ ls -l ~/elsewhere
