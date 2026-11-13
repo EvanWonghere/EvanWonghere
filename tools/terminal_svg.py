@@ -143,8 +143,8 @@ SCISSORS_SHUT = r"""
 HAIR_COL = 33  # the lock of hair hangs just past the open blade tips, where the shut blades cross it
 
 INFO = [
-    ("Role", "做游戏的程序员 · Unity 客户端"),
-    ("Host", "山东师范大学 · 计算机 2026 届"),
+    ("Role", "做游戏的程序员 · 写图形学和游戏开发笔记"),
+    ("Host", "蜂窝 Hive · yufenghuang.tech"),
     ("Engine", "Unity 6 · C#"),
     ("Shell", "zsh · Claude Code · Codex"),
     ("Packages", "1 只猫 · 1 盘棋 · 1 条蛇 · 1 只蜜蜂"),

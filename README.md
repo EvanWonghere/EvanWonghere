@@ -95,7 +95,7 @@
 
 <pre>
 <b>evan@hive</b>:~$ ls -l ~/elsewhere
-drwxr-xr-x  blog/       <a href="https://yufenghuang.tech/">蜂窝</a>：开发手记、读书笔记、游戏设计杂谈
+drwxr-xr-x  blog/       <a href="https://yufenghuang.tech/">蜂窝</a>：图形学、游戏设计与开发的学习笔记
 -rwxr-xr-x  heircut     <a href="https://store.steampowered.com/app/4268650/">《宫廷理发师》Steam 页</a>
 drwxr-xr-x  devlog/     <a href="https://yufenghuang.tech/series/heircut-%E5%BC%80%E5%8F%91%E6%89%8B%E8%AE%B0/">HeirCut 开发手记</a>：12 篇，记下它为什么难、坑在哪里
 -rw-r--r--  demo.mp4    <a href="https://www.bilibili.com/video/BV1dkbDzoE9q/">《宫廷理发师》演示视频</a>
